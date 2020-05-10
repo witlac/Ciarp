@@ -9,6 +9,7 @@ namespace Domain
         public string Description { get; set; }
         public string Answer { get; set; }
         public DateTime ClaimDate { get; set; }
+        public Request Request { get; set; }
         
         public void RequestClaim(string description)
         {

@@ -14,19 +14,25 @@ namespace Domain
         public string Title { get; set; }
         public List<string> Suports { get; set; }
         public bool Credit { get; set; }
-        public decimal Points { get; set; }
-        public abstract void Evaluate();
-        public abstract void Modify();
-
+        public int NumberOfAuthors { get; set; }
+        public abstract Request RequestEvaluate();
+        public abstract string Consult();
         public void AddSuport(String suport)
         {
             Suports.Add(suport);
         }
 
-        public override string ToString()
+        public Request GenerateRequest(decimal points)
         {
-            return ($"El puntaje de su prodictividad es {Points}");
+            Request request = new Request();
+            request.EstimatedPoints = points;
+            request.DateRequest = DateTime.Now;
+            request.academicProductivity = this;
+            //throw new InvalidOperationException($"Solicitud registrada exitosamente, su puntaje estimado es {request.EstimatedPoints}");
+            return request;
+
         }
+
 
     }
 }

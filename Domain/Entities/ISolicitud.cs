@@ -4,8 +4,7 @@ using System.Text;
 
 namespace Domain.Entities
 {
-    public class Papers
+    interface ISolicitud
     {
-
     }
 }

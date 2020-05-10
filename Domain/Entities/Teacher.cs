@@ -22,6 +22,10 @@ namespace Domain
             academicProductivities = new List<AcademicProductivity>();
         }
 
+        public void AddAcademicProductivities(AcademicProductivity academicProductivity)
+        {
+            academicProductivities.Add(academicProductivity);
+        }
 
     }
 }
