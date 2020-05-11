@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Domain.Base;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Domain
 {
-    public abstract class AcademicProductivity
+    public abstract class AcademicProductivity : Entity<int>
     {
         public AcademicProductivity()
         {
