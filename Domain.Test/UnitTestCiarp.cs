@@ -26,10 +26,9 @@ namespace Domain.Test
             even.Memories = "memories";
             even.Isbn = "131A";
             even.Issn = "1544S";
-            even.AddSuport("Instrucciones");
-            even.AddSuport("Manual");
-            even.AddSuport("Ejecutable");
-            Request request = even.RequestEvaluate();
+            
+            Request request = new Request(even);
+            request.SendRequest();
             Assert.AreEqual(request.EstimatedPoints, 84);
         }
 
@@ -48,10 +47,11 @@ namespace Domain.Test
             even.Memories = "memories";
             even.Isbn = "131A";
             even.Issn = "1544S";
-            even.AddSuport("Instrucciones");
-            even.AddSuport("Manual");
-            even.AddSuport("Ejecutable");
-            Request request = even.RequestEvaluate();
+            Suport suport = new Suport();
+            suport.Name = "asdas";
+            even.AddSuport(suport);
+            Request request = new Request(even);
+            request.SendRequest();
             Assert.AreEqual(42, request.EstimatedPoints);
         }
 
@@ -70,10 +70,9 @@ namespace Domain.Test
             even.Memories = "memories";
             even.Isbn = "131A";
             even.Issn = "1544S";
-            even.AddSuport("Instrucciones");
-            even.AddSuport("Manual");
-            even.AddSuport("Ejecutable");
-            Request request = even.RequestEvaluate();
+            
+            Request request = new Request(even);
+            request.SendRequest();
             Assert.AreEqual(24, request.EstimatedPoints);
         }
 
@@ -92,9 +91,7 @@ namespace Domain.Test
             even.Memories = "memories";
             even.Isbn = "131A";
             even.Issn = "1544S";
-            even.AddSuport("Instrucciones");
-            even.AddSuport("Manual");
-            even.AddSuport("Ejecutable");
+            
             InvalidOperationException ex = Assert.Throws<InvalidOperationException>(() => even.RequestEvaluate());
             Assert.AreEqual("Numero de autores invalido", ex.Message);
         }
@@ -114,10 +111,9 @@ namespace Domain.Test
             even.Memories = "memories";
             even.Isbn = "131A";
             even.Issn = "1544S";
-            even.AddSuport("Instrucciones");
-            even.AddSuport("Manual");
-            even.AddSuport("Ejecutable");
-            Request request = even.RequestEvaluate();
+            
+            Request request = new Request(even);
+            request.SendRequest();
             Assert.AreEqual(request.EstimatedPoints, 48);
         }
 
@@ -136,10 +132,9 @@ namespace Domain.Test
             even.Memories = "memories";
             even.Isbn = "131A";
             even.Issn = "1544S";
-            even.AddSuport("Instrucciones");
-            even.AddSuport("Manual");
-            even.AddSuport("Ejecutable");
-            Request request = even.RequestEvaluate();
+            
+            Request request = new Request(even);
+            request.SendRequest();
             Assert.AreEqual(24, request.EstimatedPoints);
         }
 
@@ -158,10 +153,9 @@ namespace Domain.Test
             even.Memories = "memories";
             even.Isbn = "131A";
             even.Issn = "1544S";
-            even.AddSuport("Instrucciones");
-            even.AddSuport("Manual");
-            even.AddSuport("Ejecutable");
-            Request request = even.RequestEvaluate();
+            
+            Request request = new Request(even);
+            request.SendRequest();
             Assert.AreEqual("13,714", string.Format("{0:0.000}", request.EstimatedPoints) );
         }
 
@@ -180,10 +174,9 @@ namespace Domain.Test
             even.Memories = "memories";
             even.Isbn = "131A";
             even.Issn = "1544S";
-            even.AddSuport("Instrucciones");
-            even.AddSuport("Manual");
-            even.AddSuport("Ejecutable");
-            Request request = even.RequestEvaluate();
+            
+            Request request = new Request(even);
+            request.SendRequest();
             Assert.AreEqual(24, request.EstimatedPoints);
         }
 
@@ -202,10 +195,9 @@ namespace Domain.Test
             even.Memories = "memories";
             even.Isbn = "131A";
             even.Issn = "1544S";
-            even.AddSuport("Instrucciones");
-            even.AddSuport("Manual");
-            even.AddSuport("Ejecutable");
-            Request request = even.RequestEvaluate();
+           
+            Request request = new Request(even);
+            request.SendRequest();
             Assert.AreEqual(12, request.EstimatedPoints);
         }
 
@@ -224,10 +216,9 @@ namespace Domain.Test
             even.Memories = "memories";
             even.Isbn = "131A";
             even.Issn = "1544S";
-            even.AddSuport("Instrucciones");
-            even.AddSuport("Manual");
-            even.AddSuport("Ejecutable");
-            Request request = even.RequestEvaluate();
+            
+            Request request = new Request(even);
+            request.SendRequest();
             Assert.AreEqual("6,857", string.Format("{0:0.000}", request.EstimatedPoints));
         }
 
@@ -243,10 +234,9 @@ namespace Domain.Test
             article.JournalName = "Nature";
             article.ArticleType = "Articulo Tradicional";
             article.Language = "Español";
-            article.AddSuport("Instrucciones");
-            article.AddSuport("Manual");
-            article.AddSuport("Ejecutable");
-            Request request = article.RequestEvaluate();
+           
+            Request request = new Request(article);
+            request.SendRequest();
             Assert.AreEqual(15, request.EstimatedPoints);
         }
 
@@ -262,10 +252,9 @@ namespace Domain.Test
             article.JournalName = "Nature";
             article.ArticleType = "Articulo Tradicional";
             article.Language = "Español";
-            article.AddSuport("Instrucciones");
-            article.AddSuport("Manual");
-            article.AddSuport("Ejecutable");
-            Request request = article.RequestEvaluate();
+            
+            Request request = new Request(article);
+            request.SendRequest();
             Assert.AreEqual(12, request.EstimatedPoints);
         }
 
@@ -281,10 +270,9 @@ namespace Domain.Test
             article.JournalName = "Nature";
             article.ArticleType = "Articulo Tradicional";
             article.Language = "Español";
-            article.AddSuport("Instrucciones");
-            article.AddSuport("Manual");
-            article.AddSuport("Ejecutable");
-            Request request = article.RequestEvaluate();
+            
+            Request request = new Request(article);
+            request.SendRequest();
             Assert.AreEqual(8, request.EstimatedPoints);
         }
 
@@ -300,10 +288,9 @@ namespace Domain.Test
             article.JournalName = "Nature";
             article.ArticleType = "Articulo Tradicional";
             article.Language = "Español";
-            article.AddSuport("Instrucciones");
-            article.AddSuport("Manual");
-            article.AddSuport("Ejecutable");
-            Request request = article.RequestEvaluate();
+            
+            Request request = new Request(article);
+            request.SendRequest();
             Assert.AreEqual(3, request.EstimatedPoints);
         }
 
@@ -319,10 +306,9 @@ namespace Domain.Test
             article.JournalName = "Nature";
             article.ArticleType = "Articulo Tradicional";
             article.Language = "Español";
-            article.AddSuport("Instrucciones");
-            article.AddSuport("Manual");
-            article.AddSuport("Ejecutable");
-            Request request = article.RequestEvaluate();
+            
+            Request request = new Request(article);
+            request.SendRequest();
             Assert.AreEqual("7,5", string.Format("{0:0.0}", request.EstimatedPoints));
         }
 
@@ -338,10 +324,9 @@ namespace Domain.Test
             article.JournalName = "Nature";
             article.ArticleType = "Articulo Tradicional";
             article.Language = "Español";
-            article.AddSuport("Instrucciones");
-            article.AddSuport("Manual");
-            article.AddSuport("Ejecutable");
-            Request request = article.RequestEvaluate();
+            
+            Request request = new Request(article);
+            request.SendRequest();
             Assert.AreEqual(6,request.EstimatedPoints);
         }
 
@@ -357,10 +342,9 @@ namespace Domain.Test
             article.JournalName = "Nature";
             article.ArticleType = "Articulo Tradicional";
             article.Language = "Español";
-            article.AddSuport("Instrucciones");
-            article.AddSuport("Manual");
-            article.AddSuport("Ejecutable");
-            Request request = article.RequestEvaluate();
+            
+            Request request = new Request(article);
+            request.SendRequest();
             Assert.AreEqual("2,29", string.Format("{0:0.00}", request.EstimatedPoints));
         }
 
@@ -376,10 +360,9 @@ namespace Domain.Test
             article.JournalName = "Nature";
             article.ArticleType = "Articulo Tradicional";
             article.Language = "Español";
-            article.AddSuport("Instrucciones");
-            article.AddSuport("Manual");
-            article.AddSuport("Ejecutable");
-            Request request = article.RequestEvaluate();
+           
+            Request request = new Request(article);
+            request.SendRequest();
             Assert.AreEqual("0,857", string.Format("{0:0.000}", request.EstimatedPoints));
         }
 
@@ -395,10 +378,9 @@ namespace Domain.Test
             article.JournalName = "Nature";
             article.ArticleType = "Articulo Corto";
             article.Language = "Español";
-            article.AddSuport("Instrucciones");
-            article.AddSuport("Manual");
-            article.AddSuport("Ejecutable");
-            Request request = article.RequestEvaluate();
+            
+            Request request = new Request(article);
+            request.SendRequest();
             Assert.AreEqual(9, request.EstimatedPoints);
         }
 
@@ -414,10 +396,9 @@ namespace Domain.Test
             article.JournalName = "Nature";
             article.ArticleType = "Articulo Corto";
             article.Language = "Español";
-            article.AddSuport("Instrucciones");
-            article.AddSuport("Manual");
-            article.AddSuport("Ejecutable");
-            Request request = article.RequestEvaluate();
+            
+            Request request = new Request(article);
+            request.SendRequest();
             Assert.AreEqual(7.2M, request.EstimatedPoints);
         }
 
@@ -433,10 +414,9 @@ namespace Domain.Test
             article.JournalName = "Nature";
             article.ArticleType = "Articulo Corto";
             article.Language = "Español";
-            article.AddSuport("Instrucciones");
-            article.AddSuport("Manual");
-            article.AddSuport("Ejecutable");
-            Request request = article.RequestEvaluate();
+            
+            Request request = new Request(article);
+            request.SendRequest();
             Assert.AreEqual(4.8, request.EstimatedPoints);
         }
 
@@ -452,10 +432,9 @@ namespace Domain.Test
             article.JournalName = "Nature";
             article.ArticleType = "Articulo Corto";
             article.Language = "Español";
-            article.AddSuport("Instrucciones");
-            article.AddSuport("Manual");
-            article.AddSuport("Ejecutable");
-            Request request = article.RequestEvaluate();
+            
+            Request request = new Request(article);
+            request.SendRequest();
             Assert.AreEqual(1.8, request.EstimatedPoints);
         }
 
@@ -471,10 +450,9 @@ namespace Domain.Test
             article.JournalName = "Nature";
             article.ArticleType = "Articulo Corto";
             article.Language = "Español";
-            article.AddSuport("Instrucciones");
-            article.AddSuport("Manual");
-            article.AddSuport("Ejecutable");
-            Request request = article.RequestEvaluate();
+            
+            Request request = new Request(article);
+            request.SendRequest();
             Assert.AreEqual("4,50", string.Format("{0:0.00}", request.EstimatedPoints));
         }
 
@@ -490,10 +468,9 @@ namespace Domain.Test
             article.JournalName = "Nature";
             article.ArticleType = "Articulo Corto";
             article.Language = "Español";
-            article.AddSuport("Instrucciones");
-            article.AddSuport("Manual");
-            article.AddSuport("Ejecutable");
-            Request request = article.RequestEvaluate();
+            
+            Request request = new Request(article);
+            request.SendRequest();
             Assert.AreEqual(3.6, request.EstimatedPoints);
         }
 
@@ -509,10 +486,9 @@ namespace Domain.Test
             article.JournalName = "Nature";
             article.ArticleType = "Articulo Corto";
             article.Language = "Español";
-            article.AddSuport("Instrucciones");
-            article.AddSuport("Manual");
-            article.AddSuport("Ejecutable");
-            Request request = article.RequestEvaluate();
+            
+            Request request = new Request(article);
+            request.SendRequest();
             Assert.AreEqual("1,371", string.Format("{0:0.000}", request.EstimatedPoints));
         }
 
@@ -528,10 +504,9 @@ namespace Domain.Test
             article.JournalName = "Nature";
             article.ArticleType = "Articulo Tradicional";
             article.Language = "Español";
-            article.AddSuport("Instrucciones");
-            article.AddSuport("Manual");
-            article.AddSuport("Ejecutable");
-            Request request = article.RequestEvaluate();
+            
+            Request request = new Request(article);
+            request.SendRequest();
             Assert.AreEqual("0,9", string.Format("{0:0.0}", request.EstimatedPoints));
         }
 
@@ -545,10 +520,9 @@ namespace Domain.Test
             software.AddAuthors("Cristian Mejia");
             software.Credit = true;
             software.Headline = "Eydy Perez";
-            software.AddSuport("Instrucciones");
-            software.AddSuport("Manual");
-            software.AddSuport("Ejecutable");
-            Request request = software.RequestEvaluate();
+           
+            Request request = new Request(software);
+            request.SendRequest();
             Assert.AreEqual(request.EstimatedPoints, 15);
         }
 
@@ -562,9 +536,7 @@ namespace Domain.Test
             software.AddAuthors("Cristian Mejia");
             software.Credit = true;
             software.Headline = "Eydy Perez";
-            software.AddSuport("Instrucciones");
-            software.AddSuport("Manual");
-            software.AddSuport("Ejecutable");
+            
             InvalidOperationException ex = Assert.Throws<InvalidOperationException>(() => software.RequestEvaluate());
 
             Assert.AreEqual(ex.Message, "Numero de autores invalido, debe ser mayo a 0");
@@ -580,10 +552,9 @@ namespace Domain.Test
             software.AddAuthors("Cristian Mejia");
             software.Credit = true;
             software.Headline = "Eydy Perez";
-            software.AddSuport("Instrucciones");
-            software.AddSuport("Manual");
-            software.AddSuport("Ejecutable");
-            Request request = software.RequestEvaluate();
+           
+            Request request = new Request(software);
+            request.SendRequest();
             request.RequestState(1);
 
             Assert.AreEqual("Recibido", request.State);
@@ -599,10 +570,9 @@ namespace Domain.Test
             software.AddAuthors("Cristian Mejia");
             software.Credit = true;
             software.Headline = "Eydy Perez";
-            software.AddSuport("Instrucciones");
-            software.AddSuport("Manual");
-            software.AddSuport("Ejecutable");
-            Request request = software.RequestEvaluate();
+            
+            Request request = new Request(software);
+            request.SendRequest();
             request.RequestState(2);
 
             Assert.AreEqual( "Aprobado",request.State);
@@ -618,11 +588,10 @@ namespace Domain.Test
             software.AddAuthors("Cristian Mejia");
             software.Credit = true;
             software.Headline = "Eydy Perez";
-            software.AddSuport("Instrucciones");
-            software.AddSuport("Manual");
-            software.AddSuport("Ejecutable");
-            Request request = software.RequestEvaluate();
             
+            Request request = new Request(software);
+            request.SendRequest();
+
             InvalidOperationException ex = Assert.Throws<InvalidOperationException>(() => request.RequestState(4));
 
             Assert.AreEqual("Estado invalido", ex.Message);
@@ -638,10 +607,9 @@ namespace Domain.Test
             software.AddAuthors("Cristian Mejia");
             software.Credit = true;
             software.Headline = "Eydy Perez";
-            software.AddSuport("Instrucciones");
-            software.AddSuport("Manual");
-            software.AddSuport("Ejecutable");
-            Request request = software.RequestEvaluate();
+            
+            Request request = new Request(software);
+            request.SendRequest();
 
             InvalidOperationException ex = Assert.Throws<InvalidOperationException>(() => request.RequestState(0));
 
@@ -658,10 +626,9 @@ namespace Domain.Test
             software.AddAuthors("Cristian Mejia");
             software.Credit = true;
             software.Headline = "Eydy Perez";
-            software.AddSuport("Instrucciones");
-            software.AddSuport("Manual");
-            software.AddSuport("Ejecutable");
-            Request request = software.RequestEvaluate();
+            
+            Request request = new Request(software);
+            request.SendRequest();
             request.RequestState(2);
             request.Evaluate(true);
 
@@ -678,10 +645,9 @@ namespace Domain.Test
             software.AddAuthors("Cristian Mejia");
             software.Credit = true;
             software.Headline = "Eydy Perez";
-            software.AddSuport("Instrucciones");
-            software.AddSuport("Manual");
-            software.AddSuport("Ejecutable");
-            Request request = software.RequestEvaluate();
+            
+            Request request = new Request(software);
+            request.SendRequest();
             request.RequestState(2);
             InvalidOperationException ex = Assert.Throws<InvalidOperationException>(() => request.Evaluate(-1));
             Assert.AreEqual("Asignacion de puntaje incorrecta, debe ser mayor a 0", ex.Message);
@@ -697,10 +663,9 @@ namespace Domain.Test
             software.AddAuthors("Cristian Mejia");
             software.Credit = true;
             software.Headline = "Eydy Perez";
-            software.AddSuport("Instrucciones");
-            software.AddSuport("Manual");
-            software.AddSuport("Ejecutable");
-            Request request = software.RequestEvaluate();
+            
+            Request request = new Request(software);
+            request.SendRequest();
             request.RequestState(2);
             InvalidOperationException ex = Assert.Throws<InvalidOperationException>(() => request.Evaluate(15));
             Assert.AreEqual("Solicitud evaluada exitosamente, su puntaje asignado es 15", ex.Message);
@@ -716,10 +681,9 @@ namespace Domain.Test
             software.AddAuthors("Cristian Mejia");
             software.Credit = true;
             software.Headline = "Eydy Perez";
-            software.AddSuport("Instrucciones");
-            software.AddSuport("Manual");
-            software.AddSuport("Ejecutable");
-            Request request = software.RequestEvaluate();
+            
+            Request request = new Request(software);
+            request.SendRequest();
             request.RequestState(2);
             var claim = new Claim();
             claim.RequestClaim("No estoy conforme, por esto...");
@@ -736,10 +700,9 @@ namespace Domain.Test
             software.AddAuthors("Cristian Mejia");
             software.Credit = true;
             software.Headline = "Eydy Perez";
-            software.AddSuport("Instrucciones");
-            software.AddSuport("Manual");
-            software.AddSuport("Ejecutable");
-            Request request = software.RequestEvaluate();
+           
+            Request request = new Request(software);
+            request.SendRequest();
             request.RequestState(2);
             var claim = new Claim();
             claim.RequestClaim("No estoy conforme, por esto...");

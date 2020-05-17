@@ -5,8 +5,7 @@ using System.Text;
 
 namespace Domain.Repositories
 {
-    public interface IAcademicProductivityRepository : IGenericRepository<AcademicProductivity>
+    public interface ISoftwareRepository : IGenericRepository<Software>
     {
-    
     }
 }

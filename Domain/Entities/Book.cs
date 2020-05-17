@@ -14,26 +14,26 @@ namespace Domain
 
         public override string Consult()
         {
-            throw new NotImplementedException();
+            return $"Titulo: {Title} Tipo de libro: {BookType} idioma: {Languaje} Numero de autores {NumberOfAuthors} Editorial: {Editorial}";
         }
 
-        public override Request RequestEvaluate()
+        public override decimal RequestEvaluate()
         {
             int basePoints = BasePoints(BookType);
 
             if (NumberOfAuthors <= 3)
             {
-                return GenerateRequest(basePoints);
+                return basePoints;
             }
             else if (NumberOfAuthors <= 5)
             {
-                return GenerateRequest(basePoints / 2M);
+                return basePoints / 2M;
             }
             else
             {
                 decimal points = basePoints / (NumberOfAuthors / 2M);
 
-                return GenerateRequest(points);
+                return points;
             }
         }
         public int BasePoints(string bookType)

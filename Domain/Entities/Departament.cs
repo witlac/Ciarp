@@ -10,6 +10,11 @@ namespace Domain
 
         public Faculty Faculty { get; set; }
 
+        public Departament()
+        {
+
+        }
+
         public Departament(string name, Faculty faculty)
         {
             Faculty = faculty;

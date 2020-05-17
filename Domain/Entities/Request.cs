@@ -1,16 +1,34 @@
-﻿using System;
+﻿using Domain.Base;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Domain
 {
-    public class Request
+    public class Request : Entity<int>
     {
-        public AcademicProductivity academicProductivity { get; set; }
+        public AcademicProductivity Productivity { get; set; }
         public DateTime DateRequest { get; set; }
-        public string State { get; protected set; }
+        public string State { get; set; }
         public decimal AssignedPoints { get; protected set; }
         public decimal EstimatedPoints { get; set; }
+
+        public Request()
+        {
+
+        }
+
+        public Request(AcademicProductivity productivity)
+        {
+            Productivity = productivity;
+        }
+
+        public void SendRequest()
+        {
+            EstimatedPoints = Productivity.RequestEvaluate();
+            DateRequest = DateTime.Now;
+            State = "Enviada";
+        }
 
         public void RequestState(int num)
         {

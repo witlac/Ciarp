@@ -7,13 +7,14 @@ namespace Domain
 {
     public class Article : AcademicProductivity
     {
+        public int Number { get; set; }
         public string JournalType { get; set; }
         public string ArticleType { get; set; }
         public string JournalName { get; set; }
         public string Issn { get; set; }
         public string Language { get; set; }
 
-        public override Request RequestEvaluate()
+        public override decimal RequestEvaluate()
         {
             if(ArticleType != null)
             {
@@ -25,49 +26,49 @@ namespace Domain
                         case "Articulo Tradicional":
                             if (NumberOfAuthors <= 3)
                             {
-                                return GenerateRequest(basePoints);
+                                return basePoints;
                             }
                             else if (NumberOfAuthors <= 5)
                             {
-                                return GenerateRequest(basePoints / 2M);
+                                return basePoints / 2M;
                             }
                             else
                             {
                                 decimal points = basePoints / (NumberOfAuthors / 2M);
-                                return GenerateRequest(points);
+                                return points;
                             }
                         case "Articulo Corto":
                             if (NumberOfAuthors <= 3)
                             {
-                                return GenerateRequest(basePoints * 0.6M);
+                                return basePoints * 0.6M;
                             }
                             else if (NumberOfAuthors <= 5)
                             {
-                                return GenerateRequest(basePoints * 0.6M / 2M);
+                                return basePoints * 0.6M / 2M;
                             }
                             else
                             {
                                 decimal points = basePoints * 0.6M / (NumberOfAuthors / 2M);
 
-                                return GenerateRequest(points);
+                                return points;
                             }
                         case "Editorial":
                             if (NumberOfAuthors <= 3)
                             {
-                                return GenerateRequest(basePoints * 0.3M);
+                                return basePoints * 0.3M;
                             }
                             else if (NumberOfAuthors <= 5)
                             {
-                                return GenerateRequest(basePoints * 0.3M / 2M);
+                                return basePoints * 0.3M / 2M;
                             }
                             else
                             {
                                 decimal points = basePoints * 0.3M / (NumberOfAuthors / 2M);
 
-                                return GenerateRequest(points);
+                                return points;
                             }
                         default:
-                            return null;
+                            return 0;
                             
                     }
                 }

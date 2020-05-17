@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Domain
@@ -7,9 +8,10 @@ namespace Domain
     public class Software :AcademicProductivity
     {
         public string Headline { get; set; }
+
+        [NotMapped]
         public List<string> Authors { get; set; }
         public string Impact { get; set; }
-
         public Software()
         {
             Authors = new List<string>();
@@ -31,11 +33,11 @@ namespace Domain
             Authors.Add(author);
         }
 
-        public override Request RequestEvaluate()
+        public override decimal RequestEvaluate()
         {
             if(NumberOfAuthors > 0)
             {
-                return GenerateRequest(15);
+                return 15;
             }
             else
             {

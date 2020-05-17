@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Domain.Base;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Domain
 {
-    public class Claim
+    public class Claim : Entity<int>
     {
         public string Description { get; set; }
         public string Answer { get; set; }

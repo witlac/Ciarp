@@ -20,23 +20,23 @@ namespace Domain.Entities
             throw new NotImplementedException();
         }
 
-        public override Request RequestEvaluate()
+        public override decimal RequestEvaluate()
         {
             int basePoints = BasePoints(EventType);
             if(NumberOfAuthors > 0)
             {
                 if (NumberOfAuthors <= 3)
                 {
-                    return GenerateRequest(basePoints);
+                    return basePoints;
                 }
                 else if (NumberOfAuthors <= 5)
                 {
-                    return GenerateRequest(basePoints / 2);
+                    return basePoints / 2M;
                 }
                 else
                 {
                     decimal points = basePoints / (NumberOfAuthors / 2M);
-                    return GenerateRequest(points);
+                    return points;
                 }
             }
             else
