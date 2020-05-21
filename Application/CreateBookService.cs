@@ -45,6 +45,12 @@ namespace Application
 
         }
 
+        public IEnumerable<Book> ConsultAll()
+        {
+            IEnumerable<Book> books = _unitOfWork.BookRepository.GetAll();
+            return books;
+        }
+
     }
 
    

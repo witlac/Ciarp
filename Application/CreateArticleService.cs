@@ -21,16 +21,16 @@ namespace Application
             {
                 Article newArticle = new Article();
                 newArticle.Title = request.Title;
-                newArticle.NumberOfAuthors = request.NumberOfAuthors;
                 newArticle.Credit = request.Credit;
                 newArticle.Issn = request.Issn;
                 newArticle.JournalType = request.JournalType;
                 newArticle.JournalName = request.JournalName;
                 newArticle.ArticleType = request.ArticleType;
                 newArticle.Language = request.Language;
+                newArticle.NumberOfAuthors = request.NumberOfAuthors;
                 _unitOfWork.ArticleRepository.Add(newArticle);
                 _unitOfWork.Commit();
-                return new CreateArticleResponse() { Menssage = $"Se creo con exito el articulo {newArticle.Number}." };                
+                return new CreateArticleResponse() { Menssage = $"Se creo con exito el articulo {newArticle.Title}." };                
             }
             else
             {
@@ -43,6 +43,12 @@ namespace Application
         {
            return _unitOfWork.ArticleRepository.FindFirstOrDefault(t => t.Title == title);
 
+        }
+
+        public IEnumerable<Article> ConsultAll()
+        {
+            IEnumerable<Article> articles = _unitOfWork.ArticleRepository.GetAll();
+            return articles;
         }
 
     }

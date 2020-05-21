@@ -49,6 +49,12 @@ namespace Application
             return _unitOfWork.EventRepository.FindFirstOrDefault(t => t.Isbn == isbn);
 
         }
+
+        public IEnumerable<Event> ConsultAll()
+        {
+            IEnumerable<Event> events = _unitOfWork.EventRepository.GetAll();
+            return events;
+        }
     }
 
     public class CreateEventRequest

@@ -39,7 +39,14 @@ namespace Application
 
         }
 
-       
+        public IEnumerable<Teacher> ConsultAll()
+        {
+            IEnumerable<Teacher> teachers = _unitOfWork.TeacherRepository.GetAll();
+            return teachers;
+        }
+
+
+
     }
 
     public class TeacherRequest

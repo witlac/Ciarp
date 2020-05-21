@@ -42,6 +42,11 @@ namespace Application
 
         }
 
+        public IEnumerable<Software> ConsultAll()
+        {
+            IEnumerable<Software> softwares = _unitOfWork.SoftwareRepository.GetAll();
+            return softwares;
+        }
 
     }
 

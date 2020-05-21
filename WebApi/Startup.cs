@@ -30,6 +30,32 @@ namespace WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            #region SwaggerOpen Api
+            //Register the Swagger services
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Version = "v1",
+                    Title = "Ciarp Api",
+                    Description = "Api concexion con ciarp",
+                    TermsOfService = new Uri("https://cla.dotnetfoundation.org/"),
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Ciarp",
+                        Email = string.Empty,
+                        Url = new Uri("https://github.com/witlac/Ciarp"),
+                    },
+                    License = new OpenApiLicense
+                    {
+                        Name = "Licencia dotnet foundation",
+                        Url = new Uri("https://www.byasystems.co/license"),
+                    }
+                });
+            });
+
+            #endregion
+
             services.AddDbContext<CiarpContext>
                 (opt => opt.UseSqlServer("Server=.\\;Database=Ciarp;Trusted_Connection=True;MultipleActiveResultSets=true"));
 
@@ -41,31 +67,7 @@ namespace WebApi
 
             services.AddControllers();
 
-            #region SwaggerOpen Api
-            //Register the Swagger services
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo
-                {
-                    Version = "v1",
-                    Title = "Task API",
-                    Description = "Task API - ASP.NET Core Web API",
-                    TermsOfService = new Uri("https://cla.dotnetfoundation.org/"),
-                    Contact = new OpenApiContact
-                    {
-                        Name = "Unicesar",
-                        Email = string.Empty,
-                        Url = new Uri("https://github.com/borisgr04/CrudNgDotNetCore3"),
-                    },
-                    License = new OpenApiLicense
-                    {
-                        Name = "Licencia dotnet foundation",
-                        Url = new Uri("https://www.byasystems.co/license"),
-                    }
-                });
-            });
-
-            #endregion
+        
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -87,11 +89,10 @@ namespace WebApi
             app.UseSwaggerUI(
                 options =>
                 {
-                    options.SwaggerEndpoint("/swagger/v1/swagger.json", "Signus Prespuesto v1");
+                    options.SwaggerEndpoint("/swagger/v1/swagger.json", "v2");
                 }
             );
             #endregion
-
 
             app.UseEndpoints(endpoints =>
             {

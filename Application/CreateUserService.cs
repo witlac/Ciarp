@@ -37,7 +37,13 @@ namespace Application
         {
             return _unitOfWork.UserRepository.FindFirstOrDefault(t => t.Name == name);
         }
-        
+
+        public IEnumerable<User> ConsultAll()
+        {
+            IEnumerable<User> users = _unitOfWork.UserRepository.GetAll();
+            return users;
+        }
+
     }
     public class UserRequest
     {
