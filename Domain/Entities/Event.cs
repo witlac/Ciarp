@@ -30,7 +30,7 @@ namespace Domain.Entities
             if (string.IsNullOrWhiteSpace(isbn))
                 errors.Add("Debe especificar un  codigo isbn");
 
-            if (numActors==null)
+            if (numActors<=0)
                 errors.Add("Debe especificar un numero de autores");
 
             return errors;

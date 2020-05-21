@@ -93,7 +93,7 @@ namespace Domain.Test
             even.Issn = "1544S";
             
             InvalidOperationException ex = Assert.Throws<InvalidOperationException>(() => even.RequestEvaluate());
-            Assert.AreEqual("Numero de autores invalido", ex.Message);
+            Assert.AreEqual("Falta un dato por especificar", ex.Message);
         }
 
         [Test]
@@ -349,6 +349,24 @@ namespace Domain.Test
         }
 
         [Test]
+        public void RegistrarSolicitudArticuloTradicionalA2MasDeCincoAutores()
+        {
+            var article = new Article();
+            article.Title = "Realidad Aumentada";
+            article.NumberOfAuthors = 7;
+            article.Credit = true;
+            article.Issn = "1544S";
+            article.JournalType = "A2";
+            article.JournalName = "Nature";
+            article.ArticleType = "Articulo Tradicional";
+            article.Language = "Español";
+
+            Request request = new Request(article);
+            request.SendRequest();
+            Assert.AreEqual("3,43", string.Format("{0:0.00}", request.EstimatedPoints));
+        }
+
+        [Test]
         public void RegistrarSolicitudArticuloTradicionalCMasDeCincoAutores()
         {
             var article = new Article();
@@ -401,6 +419,26 @@ namespace Domain.Test
             request.SendRequest();
             Assert.AreEqual(7.2M, request.EstimatedPoints);
         }
+
+
+        [Test]
+        public void RegistrarSolicitudArticuloTradicionalBMenosDeCincoAutores()
+        {
+            var article = new Article();
+            article.Title = "Realidad Aumentada";
+            article.NumberOfAuthors = 4;
+            article.Credit = true;
+            article.Issn = "1544S";
+            article.JournalType = "B";
+            article.JournalName = "Nature";
+            article.ArticleType = "Articulo Tradicional";
+            article.Language = "Español";
+
+            Request request = new Request(article);
+            request.SendRequest();
+            Assert.AreEqual(4, request.EstimatedPoints);
+        }
+
 
         [Test]
         public void RegistrarSolicitudArticuloCortoBMenosDeTresAutores()
@@ -543,7 +581,7 @@ namespace Domain.Test
         }
 
         [Test]
-        public void RegistrarSolicitudLibroAutoresMenor3()
+        public void RegistrarSolicitudLibroEnsayoEnsayoMenosDe3Autores()
         {
             var book = new Book();
             book.Title = "Ciarp";
@@ -560,6 +598,161 @@ namespace Domain.Test
             request.SendRequest();
             Assert.AreEqual(15, request.EstimatedPoints);
         }
+
+        [Test]
+        public void RegistrarSolicitudLibroEnsayoMenosDe5Autores()
+        {
+            var book = new Book();
+            book.Title = "Ciarp";
+            book.NumberOfAuthors = 4;
+            book.Title = "Ready Player One";
+            book.PublicationDate = DateTime.Now;
+            book.Languaje = "Español";
+            book.Editorial = "Norma";
+            book.Isbn = "assd";
+            book.Credit = true;
+            book.BookType = "Libro de ensayo";
+
+            Request request = new Request(book);
+            request.SendRequest();
+            Assert.AreEqual("7,5", string.Format("{0:0.0}", request.EstimatedPoints));
+        }
+
+        [Test]
+        public void RegistrarSolicitudLibroEnsayoMasDe5Autores()
+        {
+            var book = new Book();
+            book.Title = "Ciarp";
+            book.NumberOfAuthors = 7;
+            book.Title = "Ready Player One";
+            book.PublicationDate = DateTime.Now;
+            book.Languaje = "Español";
+            book.Editorial = "Norma";
+            book.Isbn = "assd";
+            book.Credit = true;
+            book.BookType = "Libro de ensayo";
+
+            Request request = new Request(book);
+            request.SendRequest();
+            Assert.AreEqual("4,3", string.Format("{0:0.0}", request.EstimatedPoints));
+        }
+
+
+        [Test]
+        public void RegistrarSolicitudLibroDeTextoMenosDe3Autores()
+        {
+            var book = new Book();
+            book.Title = "Ciarp";
+            book.NumberOfAuthors = 2;
+            book.Title = "Ready Player One";
+            book.PublicationDate = DateTime.Now;
+            book.Languaje = "Español";
+            book.Editorial = "Norma";
+            book.Isbn = "assd";
+            book.Credit = true;
+            book.BookType = "Libro de texto";
+
+            Request request = new Request(book);
+            request.SendRequest();
+            Assert.AreEqual(15, request.EstimatedPoints);
+        }
+
+        [Test]
+        public void RegistrarSolicitudLibroDeTextoMenosDe5Autores()
+        {
+            var book = new Book();
+            book.Title = "Ciarp";
+            book.NumberOfAuthors = 4;
+            book.Title = "Ready Player One";
+            book.PublicationDate = DateTime.Now;
+            book.Languaje = "Español";
+            book.Editorial = "Norma";
+            book.Isbn = "assd";
+            book.Credit = true;
+            book.BookType = "Libro de texto";
+
+            Request request = new Request(book);
+            request.SendRequest();
+            Assert.AreEqual("7,5", string.Format("{0:0.0}", request.EstimatedPoints));
+        }
+
+        [Test]
+        public void RegistrarSolicitudLibroDeTextoMasDe5Autores()
+        {
+            var book = new Book();
+            book.Title = "Ciarp";
+            book.NumberOfAuthors = 7;
+            book.Title = "Ready Player One";
+            book.PublicationDate = DateTime.Now;
+            book.Languaje = "Español";
+            book.Editorial = "Norma";
+            book.Isbn = "assd";
+            book.Credit = true;
+            book.BookType = "Libro de texto";
+
+            Request request = new Request(book);
+            request.SendRequest();
+            Assert.AreEqual("4,3", string.Format("{0:0.0}", request.EstimatedPoints));
+        }
+
+        [Test]
+        public void RegistrarSolicitudLibroDeInvestigacionMenosDe3Autores()
+        {
+            var book = new Book();
+            book.Title = "Ciarp";
+            book.NumberOfAuthors = 2;
+            book.Title = "Ready Player One";
+            book.PublicationDate = DateTime.Now;
+            book.Languaje = "Español";
+            book.Editorial = "Norma";
+            book.Isbn = "assd";
+            book.Credit = true;
+            book.BookType = "Libro de resultado de una labor de investigacion";
+
+            Request request = new Request(book);
+            request.SendRequest();
+            Assert.AreEqual(20, request.EstimatedPoints);
+        }
+
+        [Test]
+        public void RegistrarSolicitudLibroDeInvestigacionMenosDe5Autores()
+        {
+            var book = new Book();
+            book.Title = "Ciarp";
+            book.NumberOfAuthors = 4;
+            book.Title = "Ready Player One";
+            book.PublicationDate = DateTime.Now;
+            book.Languaje = "Español";
+            book.Editorial = "Norma";
+            book.Isbn = "assd";
+            book.Credit = true;
+            book.BookType = "Libro de resultado de una labor de investigacion";
+
+            Request request = new Request(book);
+            request.SendRequest();
+            Assert.AreEqual(10, request.EstimatedPoints);
+        }
+
+        [Test]
+        public void RegistrarSolicitudLibroDeInvestigacionMasDe5Autores()
+        {
+            var book = new Book();
+            book.Title = "Ciarp";
+            book.NumberOfAuthors = 7;
+            book.Title = "Ready Player One";
+            book.PublicationDate = DateTime.Now;
+            book.Languaje = "Español";
+            book.Editorial = "Norma";
+            book.Isbn = "assd";
+            book.Credit = true;
+            book.BookType = "Libro de resultado de una labor de investigacion";
+
+            Request request = new Request(book);
+            request.SendRequest();
+            Assert.AreEqual("5,7", string.Format("{0:0.0}", request.EstimatedPoints));
+        }
+
+
 
         [Test]
         public void CambiarEstadoSolicitudRecibido()
