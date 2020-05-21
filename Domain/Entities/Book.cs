@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Domain
@@ -17,24 +18,53 @@ namespace Domain
             return $"Titulo: {Title} Tipo de libro: {BookType} idioma: {Languaje} Numero de autores {NumberOfAuthors} Editorial: {Editorial}";
         }
 
+        public IReadOnlyList<string> CanEvaluate(string bookType, string editorial, DateTime publicationDate, string isbn)
+        {
+            var errors = new List<string>();
+
+            if (string.IsNullOrWhiteSpace(bookType))
+                errors.Add("Debe especificar un tipo de libro");
+
+            if (string.IsNullOrWhiteSpace(editorial))
+                errors.Add("Debe especificar una editorial");
+
+            if (string.IsNullOrWhiteSpace(isbn))
+                errors.Add("Debe especificar un isbn");
+
+            if (publicationDate==null)
+                errors.Add("Debe especificar una fecha de publicacion");
+
+            return errors;
+
+        }
+
+
         public override decimal RequestEvaluate()
         {
-            int basePoints = BasePoints(BookType);
-
-            if (NumberOfAuthors <= 3)
+            if (CanEvaluate(BookType, Editorial,PublicationDate, Isbn).Any())
             {
-                return basePoints;
-            }
-            else if (NumberOfAuthors <= 5)
-            {
-                return basePoints / 2M;
+                throw new InvalidOperationException("Falta un dato por especificar");
             }
             else
             {
-                decimal points = basePoints / (NumberOfAuthors / 2M);
+                int basePoints = BasePoints(BookType);
 
-                return points;
+                if (NumberOfAuthors <= 3)
+                {
+                    return basePoints;
+                }
+                else if (NumberOfAuthors <= 5)
+                {
+                    return basePoints / 2M;
+                }
+                else
+                {
+                    decimal points = basePoints / (NumberOfAuthors / 2M);
+
+                    return points;
+                }
             }
+            
         }
         public int BasePoints(string bookType)
         {

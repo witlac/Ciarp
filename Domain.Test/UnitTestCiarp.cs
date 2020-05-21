@@ -551,6 +551,7 @@ namespace Domain.Test
             book.Title = "Ready Player One";
             book.PublicationDate = DateTime.Now;
             book.Languaje = "Español";
+            book.Editorial = "Norma";
             book.Isbn = "assd";
             book.Credit = true;
             book.BookType = "Libro de ensayo";

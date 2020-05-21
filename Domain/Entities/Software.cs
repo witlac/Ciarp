@@ -16,6 +16,7 @@ namespace Domain
         {
             Authors = new List<string>();
         }
+
         public override string Consult()
         {
             string response =  $"Titulo: {Title} Tipo de revista: {Headline} Nombre revista {Impact} Numero de autores: ";

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Domain.Entities
@@ -15,35 +16,64 @@ namespace Domain.Entities
         public string Memories { get; set; }
         public string Isbn { get; set; }
         public string Issn { get; set; }
-        public override string Consult()
+
+        public IReadOnlyList<string> CanEvaluate(string eventType, string issn, string isbn,int numActors)
         {
-            throw new NotImplementedException();
+            var errors = new List<string>();
+
+            if (string.IsNullOrWhiteSpace(eventType))
+                errors.Add("Debe especificar un tipo de evento");
+
+            if (string.IsNullOrWhiteSpace(issn))
+                errors.Add("Debe especificar un codigo issn");
+
+            if (string.IsNullOrWhiteSpace(isbn))
+                errors.Add("Debe especificar un  codigo isbn");
+
+            if (numActors==null)
+                errors.Add("Debe especificar un numero de autores");
+
+            return errors;
+
         }
 
         public override decimal RequestEvaluate()
         {
-            int basePoints = BasePoints(EventType);
-            if(NumberOfAuthors > 0)
+            if (CanEvaluate(EventType,Issn, Isbn,NumberOfAuthors).Any())
             {
-                if (NumberOfAuthors <= 3)
-                {
-                    return basePoints;
-                }
-                else if (NumberOfAuthors <= 5)
-                {
-                    return basePoints / 2M;
-                }
-                else
-                {
-                    decimal points = basePoints / (NumberOfAuthors / 2M);
-                    return points;
-                }
+                throw new InvalidOperationException("Falta un dato por especificar");
             }
             else
             {
-                throw new InvalidOperationException("Numero de autores invalido");
+                int basePoints = BasePoints(EventType);
+                if (NumberOfAuthors > 0)
+                {
+                    if (NumberOfAuthors <= 3)
+                    {
+                        return basePoints;
+                    }
+                    else if (NumberOfAuthors <= 5)
+                    {
+                        return basePoints / 2M;
+                    }
+                    else
+                    {
+                        decimal points = basePoints / (NumberOfAuthors / 2M);
+                        return points;
+                    }
+                }
+                else
+                {
+                    throw new InvalidOperationException("Numero de autores invalido");
+                }
             }
+
            
+        }
+
+        public override string Consult()
+        {
+            return $"Titulo: {Title} Tipo de ponencia: {EventType} idioma: {Languaje} Numero de autores {NumberOfAuthors} Isbn: {Isbn}";
         }
 
         public int BasePoints(string eventType)

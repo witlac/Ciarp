@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -14,76 +15,88 @@ namespace Domain
         public string Issn { get; set; }
         public string Language { get; set; }
 
+        public IReadOnlyList<string> CanEvaluate(string journalType,string articleType,string journalName,string issn)
+        {
+            var errors = new List<string>();
+
+            if (string.IsNullOrWhiteSpace(journalType))
+                errors.Add("Debe especificar un tipo de revista");
+
+            if (string.IsNullOrWhiteSpace(issn))
+                errors.Add("Debe especificar un codigo issn");
+
+            if (string.IsNullOrWhiteSpace(articleType))
+                errors.Add("Debe especificar un tipo de articulo");
+
+            if (string.IsNullOrWhiteSpace(journalName))
+                errors.Add("Debe especificar un nombre a la revista");
+
+            return errors;
+
+        }
+
         public override decimal RequestEvaluate()
         {
-            if(ArticleType != null)
+           IReadOnlyList<string> canDeliver = CanEvaluate(JournalType, ArticleType, JournalName, Issn);
+           if (canDeliver.Any())
             {
-                if(JournalType != null)
-                {
-                    int basePoints = BasePoints(JournalType);
-                    switch (ArticleType)
-                    {
-                        case "Articulo Tradicional":
-                            if (NumberOfAuthors <= 3)
-                            {
-                                return basePoints;
-                            }
-                            else if (NumberOfAuthors <= 5)
-                            {
-                                return basePoints / 2M;
-                            }
-                            else
-                            {
-                                decimal points = basePoints / (NumberOfAuthors / 2M);
-                                return points;
-                            }
-                        case "Articulo Corto":
-                            if (NumberOfAuthors <= 3)
-                            {
-                                return basePoints * 0.6M;
-                            }
-                            else if (NumberOfAuthors <= 5)
-                            {
-                                return basePoints * 0.6M / 2M;
-                            }
-                            else
-                            {
-                                decimal points = basePoints * 0.6M / (NumberOfAuthors / 2M);
-
-                                return points;
-                            }
-                        case "Editorial":
-                            if (NumberOfAuthors <= 3)
-                            {
-                                return basePoints * 0.3M;
-                            }
-                            else if (NumberOfAuthors <= 5)
-                            {
-                                return basePoints * 0.3M / 2M;
-                            }
-                            else
-                            {
-                                decimal points = basePoints * 0.3M / (NumberOfAuthors / 2M);
-
-                                return points;
-                            }
-                        default:
-                            return 0;
-                            
-                    }
-                }
-                else
-                {
-                    throw new ArticleRequestExeption("No se a asignado un tipo de revista");
-
-                }
-
+                throw new InvalidOperationException("Falta un campo por expecificar");
             }
             else
             {
-                throw new ArticleRequestExeption("No se a asignado un tipo de articulo");
-            }
-           
+                int basePoints = BasePoints(JournalType);
+                switch (ArticleType)
+                {
+                    case "Articulo Tradicional":
+                        if (NumberOfAuthors <= 3)
+                        {
+                            return basePoints;
+                        }
+                        else if (NumberOfAuthors <= 5)
+                        {
+                            return basePoints / 2M;
+                        }
+                        else
+                        {
+                            decimal points = basePoints / (NumberOfAuthors / 2M);
+                            return points;
+                        }
+                    case "Articulo Corto":
+                        if (NumberOfAuthors <= 3)
+                        {
+                            return basePoints * 0.6M;
+                        }
+                        else if (NumberOfAuthors <= 5)
+                        {
+                            return basePoints * 0.6M / 2M;
+                        }
+                        else
+                        {
+                            decimal points = basePoints * 0.6M / (NumberOfAuthors / 2M);
+
+                            return points;
+                        }
+                    case "Editorial":
+                        if (NumberOfAuthors <= 3)
+                        {
+                            return basePoints * 0.3M;
+                        }
+                        else if (NumberOfAuthors <= 5)
+                        {
+                            return basePoints * 0.3M / 2M;
+                        }
+                        else
+                        {
+                            decimal points = basePoints * 0.3M / (NumberOfAuthors / 2M);
+
+                            return points;
+                        }
+                    default:
+                        return 0;
+
+                }
+            }  
+             
         }
 
         public override string Consult()
