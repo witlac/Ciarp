@@ -36,6 +36,12 @@ namespace Application
                 return new CreateSoftwareResponse() { Menssage = "No se pudo registrar el software" };
             }
         }
+        public Software Consult(string title)
+        {
+            return _unitOfWork.SoftwareRepository.FindFirstOrDefault(t => t.Title == title);
+
+        }
+
 
     }
 

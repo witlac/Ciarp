@@ -44,6 +44,11 @@ namespace Application
             }
         }
 
+        public Event Consult(string isbn)
+        {
+            return _unitOfWork.EventRepository.FindFirstOrDefault(t => t.Isbn == isbn);
+
+        }
     }
 
     public class CreateEventRequest

@@ -27,6 +27,7 @@ namespace Application
                 newBook.Title = request.Title;
                 newBook.Credit = request.Credit;
                 newBook.Editorial = request.Editorial;
+                newBook.BookType = request.BookType;
                 _unitOfWork.BookRepository.Add(newBook);
                 _unitOfWork.Commit();
                 return new CreateBookResponse() { Menssage = "Libro registado con exito" };
@@ -38,7 +39,15 @@ namespace Application
             }
         }
 
+        public Book Consult(string title)
+        {
+            return _unitOfWork.BookRepository.FindFirstOrDefault(t => t.Title == title);
+
+        }
+
     }
+
+   
 
     public class CreateBookRequest
     {

@@ -543,6 +543,24 @@ namespace Domain.Test
         }
 
         [Test]
+        public void RegistrarSolicitudLibroAutoresMenor3()
+        {
+            var book = new Book();
+            book.Title = "Ciarp";
+            book.NumberOfAuthors =2;
+            book.Title = "Ready Player One";
+            book.PublicationDate = DateTime.Now;
+            book.Languaje = "Español";
+            book.Isbn = "assd";
+            book.Credit = true;
+            book.BookType = "Libro de ensayo";
+
+            Request request = new Request(book);
+            request.SendRequest();
+            Assert.AreEqual(15, request.EstimatedPoints);
+        }
+
+        [Test]
         public void CambiarEstadoSolicitudRecibido()
         {
             var software = new Software();

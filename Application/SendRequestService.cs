@@ -23,7 +23,7 @@ namespace Application
                 newRequest.SendRequest();
                 _unitOfWork.RequestRepository.Add(newRequest);
                 _unitOfWork.Commit();
-                return new CreateRequestResponse() { Menssage = $"La solicitud del articulo {properties.Productivity.Title} fue enviada con exito, su puntaje estimado es {newRequest.EstimatedPoints}." };
+                return new CreateRequestResponse() { Menssage = $"La solicitud de la productividad {properties.Productivity.Title} fue enviada con exito, su puntaje estimado es {newRequest.EstimatedPoints}." };
             }
             else
             {
