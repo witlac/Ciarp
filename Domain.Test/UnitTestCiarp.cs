@@ -420,6 +420,59 @@ namespace Domain.Test
             Assert.AreEqual(7.2M, request.EstimatedPoints);
         }
 
+        [Test]
+        public void RegistrarSolicitudArticuloCortoBMenosDeCincoAutores()
+        {
+            var article = new Article();
+            article.Title = "Realidad Aumentada";
+            article.NumberOfAuthors = 4;
+            article.Credit = true;
+            article.Issn = "1544S";
+            article.JournalType = "B";
+            article.JournalName = "Nature";
+            article.ArticleType = "Articulo Corto";
+            article.Language = "Español";
+
+            Request request = new Request(article);
+            request.SendRequest();
+            Assert.AreEqual(2.4M, request.EstimatedPoints);
+        }
+
+        [Test]
+        public void RegistrarSolicitudArticuloCortoCMenosDeCincoAutores()
+        {
+            var article = new Article();
+            article.Title = "Realidad Aumentada";
+            article.NumberOfAuthors = 4;
+            article.Credit = true;
+            article.Issn = "1544S";
+            article.JournalType = "C";
+            article.JournalName = "Nature";
+            article.ArticleType = "Articulo Corto";
+            article.Language = "Español";
+
+            Request request = new Request(article);
+            request.SendRequest();
+            Assert.AreEqual(0.9M, request.EstimatedPoints);
+        }
+
+        [Test]
+        public void RegistrarSolicitudArticuloCortoA1MenosDeCincoAutores()
+        {
+            var article = new Article();
+            article.Title = "Realidad Aumentada";
+            article.NumberOfAuthors = 3;
+            article.Credit = true;
+            article.Issn = "1544S";
+            article.JournalType = "A1";
+            article.JournalName = "Nature";
+            article.ArticleType = "Articulo Corto";
+            article.Language = "Español";
+
+            Request request = new Request(article);
+            request.SendRequest();
+            Assert.AreEqual(9M, request.EstimatedPoints);
+        }
 
         [Test]
         public void RegistrarSolicitudArticuloTradicionalBMenosDeCincoAutores()
@@ -477,11 +530,11 @@ namespace Domain.Test
         }
 
         [Test]
-        public void RegistrarSolicitudArticuloCortoA1MenosDeCincoAutores()
+        public void RegistrarSolicitudArticuloCortoA1MasDeCincoAutores()
         {
             var article = new Article();
             article.Title = "Realidad Aumentada";
-            article.NumberOfAuthors = 5;
+            article.NumberOfAuthors = 7;
             article.Credit = true;
             article.Issn = "1544S";
             article.JournalType = "A1";
@@ -491,7 +544,7 @@ namespace Domain.Test
             
             Request request = new Request(article);
             request.SendRequest();
-            Assert.AreEqual("4,50", string.Format("{0:0.00}", request.EstimatedPoints));
+            Assert.AreEqual("2,57", string.Format("{0:0.00}", request.EstimatedPoints));
         }
 
         [Test]
@@ -510,6 +563,24 @@ namespace Domain.Test
             Request request = new Request(article);
             request.SendRequest();
             Assert.AreEqual(3.6, request.EstimatedPoints);
+        }
+
+        [Test]
+        public void RegistrarSolicitudArticuloCortoA2MasDeCincoAtuores()
+        {
+            var article = new Article();
+            article.Title = "Realidad Aumentada";
+            article.NumberOfAuthors = 7;
+            article.Credit = true;
+            article.Issn = "1544S";
+            article.JournalType = "A2";
+            article.JournalName = "Nature";
+            article.ArticleType = "Articulo Corto";
+            article.Language = "Español";
+
+            Request request = new Request(article);
+            request.SendRequest();
+            Assert.AreEqual("2,06", string.Format("{0:0.00}", request.EstimatedPoints));
         }
 
         [Test]
