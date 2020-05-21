@@ -20,7 +20,6 @@ namespace WebApi.Controllers
 
         public ArticlesController( IUnitOfWork unitOfWork)
         {
-            //_context = context;
             _unitOfWork = unitOfWork;
         }
 

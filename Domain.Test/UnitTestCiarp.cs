@@ -241,6 +241,24 @@ namespace Domain.Test
         }
 
         [Test]
+        public void RegistrarSolicitudArticuloTradicionalA1MasDeCincoAutores()
+        {
+            var article = new Article();
+            article.Title = "Realidad Aumentada";
+            article.NumberOfAuthors = 7;
+            article.Credit = true;
+            article.Issn = "1544S";
+            article.JournalType = "A1";
+            article.JournalName = "Nature";
+            article.ArticleType = "Articulo Tradicional";
+            article.Language = "Español";
+
+            Request request = new Request(article);
+            request.SendRequest();
+            Assert.AreEqual("4,29", string.Format("{0:0.00}", request.EstimatedPoints));
+        }
+
+        [Test]
         public void RegistrarSolicitudArticuloTradicionalA2MenosDeTresAutores()
         {
             var article = new Article();
@@ -258,7 +276,7 @@ namespace Domain.Test
             Assert.AreEqual(12, request.EstimatedPoints);
         }
 
-        [Test]
+              [Test]
         public void RegistrarSolicitudArticuloTradicionalBMenosDeTresAutores()
         {
             var article = new Article();
@@ -292,6 +310,24 @@ namespace Domain.Test
             Request request = new Request(article);
             request.SendRequest();
             Assert.AreEqual(3, request.EstimatedPoints);
+        }
+
+        [Test]
+        public void RegistrarSolicitudArticuloTradicionalCMenosDeCincoAutores()
+        {
+            var article = new Article();
+            article.Title = "Realidad Aumentada";
+            article.NumberOfAuthors = 4;
+            article.Credit = true;
+            article.Issn = "1544S";
+            article.JournalType = "C";
+            article.JournalName = "Nature";
+            article.ArticleType = "Articulo Tradicional";
+            article.Language = "Español";
+
+            Request request = new Request(article);
+            request.SendRequest();
+            Assert.AreEqual(1.5m, request.EstimatedPoints);
         }
 
         [Test]

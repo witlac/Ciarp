@@ -23,9 +23,5 @@ namespace Infrastructure
         public DbSet<User> Users { get; set; }
         public DbSet<Claim> Claims { get; set; }
 
-        //public DbSet<Departament> Departaments { get; set; }
-        //public DbSet<Faculty> Faculties { get; set; }
-
-
     }
 }
