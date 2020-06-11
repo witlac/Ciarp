@@ -39,6 +39,41 @@ namespace Application
 
         }
 
+        public CreateArticleResponse TeacherArticleResponse(ArticleRequest request)
+        {
+            Teacher teacher = _unitOfWork.TeacherRepository.FindFirstOrDefault(t => t.DocumentId == request.DocumentTeacher);
+            if (teacher == null)
+            {
+                return new CreateArticleResponse() { Menssage = $"El docente no existe" };
+            }
+            else
+            {
+                AcademicProductivity article = _unitOfWork.ArticleRepository.FindFirstOrDefault(t => t.Title == request.Title && t.Issn == request.Issn);
+                if (article == null)
+                {
+                    Article newArticle = new Article();
+                    newArticle.Title = request.Title;
+                    newArticle.Credit = request.Credit;
+                    newArticle.Issn = request.Issn;
+                    newArticle.JournalType = request.JournalType;
+                    newArticle.JournalName = request.JournalName;
+                    newArticle.ArticleType = request.ArticleType;
+                    newArticle.Language = request.Language;
+                    newArticle.NumberOfAuthors = request.NumberOfAuthors;
+                    teacher.AddAcademicProductivities(newArticle);
+                    _unitOfWork.ArticleRepository.Add(newArticle);
+                    _unitOfWork.Commit();
+                    return new CreateArticleResponse() { Menssage = $"El profesor {teacher.Name} creo con exito el articulo {newArticle.Title}." };
+                }
+                else
+                {
+                    return new CreateArticleResponse() { Menssage = $"No se pudo completar el registro porque un articulo igual ya esta registrado" };
+                }
+            }
+           
+
+        }
+
         public Article Consult(string title)
         {
            return _unitOfWork.ArticleRepository.FindFirstOrDefault(t => t.Title == title);
@@ -55,6 +90,7 @@ namespace Application
 
     public class ArticleRequest
     {
+        public string DocumentTeacher { get; set; }
         public string Title { get; set; }
         public bool Credit { get; set; }
         public int NumberOfAuthors { get; set; }

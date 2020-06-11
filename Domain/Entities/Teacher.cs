@@ -17,21 +17,22 @@ namespace Domain
         public string InvestigationGroup { get; set; }
         public User User { get; set; }
 
-        public List<AcademicProductivity> academicProductivities;
+        public List<AcademicProductivity> AcademicProductivities { get; set; }
 
         public Teacher()
         {
+            AcademicProductivities = new List<AcademicProductivity>();
 
         }
         public Teacher(User user)
         {
-            academicProductivities = new List<AcademicProductivity>();
+            AcademicProductivities = new List<AcademicProductivity>();
             User = user;
         }
 
         public void AddAcademicProductivities(AcademicProductivity academicProductivity)
         {
-            academicProductivities.Add(academicProductivity);
+            AcademicProductivities.Add(academicProductivity);
         }
 
     }

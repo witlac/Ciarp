@@ -20,7 +20,7 @@ namespace Application
             Teacher teacher = _unitOfWork.TeacherRepository.FindFirstOrDefault(t => t.DocumentId == request.DocumentId);
             if (teacher == null)
             {
-                Teacher newTeacher = new Teacher(request.User);
+                Teacher newTeacher = new Teacher();
                 newTeacher.Name = request.Name;
                 newTeacher.DocumentId = request.DocumentId;
                 newTeacher.Category = request.Category;

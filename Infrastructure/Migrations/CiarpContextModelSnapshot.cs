@@ -36,10 +36,15 @@ namespace Infrastructure.Migrations
                     b.Property<int>("NumberOfAuthors")
                         .HasColumnType("int");
 
+                    b.Property<int?>("TeacherId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("TeacherId");
 
                     b.ToTable("AcademicProductivity");
 
@@ -95,13 +100,13 @@ namespace Infrastructure.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<decimal>("AssignedPoints")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18,4)");
 
                     b.Property<DateTime>("DateRequest")
                         .HasColumnType("datetime2");
 
                     b.Property<decimal>("EstimatedPoints")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18,4)");
 
                     b.Property<int?>("ProductivityId")
                         .HasColumnType("int");
@@ -267,6 +272,13 @@ namespace Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasDiscriminator().HasValue("Software");
+                });
+
+            modelBuilder.Entity("Domain.AcademicProductivity", b =>
+                {
+                    b.HasOne("Domain.Teacher", null)
+                        .WithMany("AcademicProductivities")
+                        .HasForeignKey("TeacherId");
                 });
 
             modelBuilder.Entity("Domain.Claim", b =>

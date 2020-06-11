@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(CiarpContext))]
-    [Migration("20200521051449_MyFirstMigration")]
-    partial class MyFirstMigration
+    [Migration("20200611190719_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -38,10 +38,15 @@ namespace Infrastructure.Migrations
                     b.Property<int>("NumberOfAuthors")
                         .HasColumnType("int");
 
+                    b.Property<int?>("TeacherId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("TeacherId");
 
                     b.ToTable("AcademicProductivity");
 
@@ -196,9 +201,6 @@ namespace Infrastructure.Migrations
                     b.Property<string>("Language")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Number")
-                        .HasColumnType("int");
-
                     b.HasDiscriminator().HasValue("Article");
                 });
 
@@ -272,6 +274,13 @@ namespace Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasDiscriminator().HasValue("Software");
+                });
+
+            modelBuilder.Entity("Domain.AcademicProductivity", b =>
+                {
+                    b.HasOne("Domain.Teacher", null)
+                        .WithMany("AcademicProductivities")
+                        .HasForeignKey("TeacherId");
                 });
 
             modelBuilder.Entity("Domain.Claim", b =>

@@ -1,6 +1,7 @@
 ﻿using Domain.Base;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Domain
@@ -10,7 +11,11 @@ namespace Domain
         public AcademicProductivity Productivity { get; set; }
         public DateTime DateRequest { get; set; }
         public string State { get; set; }
+
+        [Column(TypeName = "decimal(18,4)")]
         public decimal AssignedPoints { get; protected set; }
+
+        [Column(TypeName = "decimal(18,4)")]
         public decimal EstimatedPoints { get; set; }
 
         public Request()
