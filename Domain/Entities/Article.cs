@@ -8,7 +8,6 @@ namespace Domain
 {
     public class Article : AcademicProductivity
     {
-        public int Number { get; set; }
         public string JournalType { get; set; }
         public string ArticleType { get; set; }
         public string JournalName { get; set; }

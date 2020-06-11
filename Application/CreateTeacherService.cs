@@ -2,6 +2,7 @@
 using Domain.Contracts;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace Application
@@ -44,14 +45,12 @@ namespace Application
             IEnumerable<Teacher> teachers = _unitOfWork.TeacherRepository.GetAll();
             return teachers;
         }
-
-
-
     }
 
     public class TeacherRequest
     {
         public string Name { get; set; }
+        [Required]
         public string DocumentId { get; set; }
         public string DocumentType { get; set; }
         public string Category { get; set; }
