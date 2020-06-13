@@ -48,6 +48,31 @@ namespace Application
            
 
         }
+        public CreateArticleResponse SendRequestArticle(SendRequestProperties properties)
+        {
+            AcademicProductivity article = _unitOfWork.ArticleRepository.FindFirstOrDefault(t => t.Title == properties.TitleProductivity && t.Issn == properties.IssnProductivity);
+            if (article == null)
+            {
+                return new CreateArticleResponse() { Menssage = $"El articulo que desea enviar al comite no existe" };
+            }
+            else
+            {
+                Request request = _unitOfWork.RequestRepository.FindFirstOrDefault(t => t.Productivity.Title == properties.TitleProductivity);
+                if (request == null)
+                {
+                    Request newRequest = new Request(article);
+                    newRequest.SendRequest();
+                    _unitOfWork.RequestRepository.Add(newRequest);
+                    _unitOfWork.Commit();
+                    return new CreateArticleResponse() { Menssage = $"La solicitud de la productividad {properties.TitleProductivity} fue enviada con exito, su puntaje estimado es {newRequest.EstimatedPoints}." };
+                }
+                else
+                {
+                    return new CreateArticleResponse() { Menssage = $"No se pudo el envio de la solicitud porque ya realizo una solicitud de esa productividad" };
+                }
+            }
+          
+        }
 
         public Article Consult(string title)
         {

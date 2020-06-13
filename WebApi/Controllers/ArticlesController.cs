@@ -30,7 +30,7 @@ namespace WebApi.Controllers
             CreateArticleResponse response = _service.Execute(request);
             return Ok(response);
         }
-
+        
         [HttpGet]
         public IEnumerable<Article> Gets()
         {
@@ -38,7 +38,7 @@ namespace WebApi.Controllers
             var articles = _service.ConsultAll();
             return articles;
         }
-
+        
 
     }
 }

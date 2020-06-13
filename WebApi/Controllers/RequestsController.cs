@@ -25,11 +25,19 @@ namespace WebApi.Controllers
         }
 
         [HttpPost]
-        public ActionResult<SendRequestService> Post(CreateRequestProperties request)
+        public ActionResult<CreateArticleService> Post(SendRequestProperties request)
         {
             SendRequestService _service = new SendRequestService(_unitOfWork);
-            CreateRequestResponse response = _service.Execute(request);
+            CreateRequestResponse response = _service.SendArticle(request);
             return Ok(response);
+        }
+
+        [HttpGet]
+        public IEnumerable<Request> Gets()
+        {
+            SendRequestService _service = new SendRequestService(_unitOfWork);
+            var requests = _service.ConsultAll();
+            return requests;
         }
 
 
