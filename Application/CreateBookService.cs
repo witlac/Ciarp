@@ -14,28 +14,37 @@ namespace Application
             _unitOfWork = unitOfWork;
         }
 
-        public CreateBookResponse Execute(CreateBookRequest request)
+        public CreateBookResponse CreateBook(CreateBookRequest request)
         {
-            AcademicProductivity book = _unitOfWork.BookRepository.FindFirstOrDefault(t=> t.Isbn == request.Isbn);
-            if(book == null)
+            Teacher teacher = _unitOfWork.TeacherRepository.FindFirstOrDefault(t => t.DocumentId == request.DocumentTeacher);
+            if (teacher == null)
             {
-                Book newBook = new Book();
-                newBook.Isbn = request.Isbn;
-                newBook.Languaje = request.Languaje;
-                newBook.NumberOfAuthors = request.NumberOfAuthors;
-                newBook.PublicationDate = request.PublicationDate;
-                newBook.Title = request.Title;
-                newBook.Credit = request.Credit;
-                newBook.Editorial = request.Editorial;
-                newBook.BookType = request.BookType;
-                _unitOfWork.BookRepository.Add(newBook);
-                _unitOfWork.Commit();
-                return new CreateBookResponse() { Menssage = "Libro registado con exito" };
-
+                return new CreateBookResponse() { Menssage = $"El docente no existe" };
             }
             else
             {
-                return new CreateBookResponse() { Menssage = "No se pudo registrar el libor" };
+                AcademicProductivity book = _unitOfWork.BookRepository.FindFirstOrDefault(t => t.Isbn == request.Isbn);
+                if (book == null)
+                {
+                    Book newBook = new Book();
+                    newBook.Isbn = request.Isbn;
+                    newBook.Languaje = request.Languaje;
+                    newBook.NumberOfAuthors = request.NumberOfAuthors;
+                    newBook.PublicationDate = request.PublicationDate;
+                    newBook.Title = request.Title;
+                    newBook.Credit = request.Credit;
+                    newBook.Editorial = request.Editorial;
+                    newBook.BookType = request.BookType;
+                    teacher.AddAcademicProductivities(newBook);
+                    _unitOfWork.BookRepository.Add(newBook);
+                    _unitOfWork.Commit();
+                    return new CreateBookResponse() { Menssage = "Libro registado con exito" };
+
+                }
+                else
+                {
+                    return new CreateBookResponse() { Menssage = "Ya existe una copia registrada de ese libro" };
+                }
             }
         }
 
@@ -57,6 +66,7 @@ namespace Application
 
     public class CreateBookRequest
     {
+        public string DocumentTeacher { get; set; }
         public string Title { get; set; }
         public bool Credit { get; set; }
         public int NumberOfAuthors { get; set; }

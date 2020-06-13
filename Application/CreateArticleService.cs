@@ -16,31 +16,6 @@ namespace Application
 
         public CreateArticleResponse Execute(ArticleRequest request)
         {
-            AcademicProductivity article = _unitOfWork.ArticleRepository.FindFirstOrDefault(t => t.Title == request.Title && t.Issn == request.Issn);
-            if(article == null)
-            {
-                Article newArticle = new Article();
-                newArticle.Title = request.Title;
-                newArticle.Credit = request.Credit;
-                newArticle.Issn = request.Issn;
-                newArticle.JournalType = request.JournalType;
-                newArticle.JournalName = request.JournalName;
-                newArticle.ArticleType = request.ArticleType;
-                newArticle.Language = request.Language;
-                newArticle.NumberOfAuthors = request.NumberOfAuthors;
-                _unitOfWork.ArticleRepository.Add(newArticle);
-                _unitOfWork.Commit();
-                return new CreateArticleResponse() { Menssage = $"Se creo con exito el articulo {newArticle.Title}." };                
-            }
-            else
-            {
-                return new CreateArticleResponse() { Menssage = $"No se pudo completar el registro porque un articulo igual ya esta registrado" };
-            }
-
-        }
-
-        public CreateArticleResponse TeacherArticleResponse(ArticleRequest request)
-        {
             Teacher teacher = _unitOfWork.TeacherRepository.FindFirstOrDefault(t => t.DocumentId == request.DocumentTeacher);
             if (teacher == null)
             {

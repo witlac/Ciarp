@@ -97,7 +97,7 @@ namespace Aplicattion.Test
         {
 
             CreateArticleService _articleService = new CreateArticleService(new UnitOfWork(_context));
-            var articleRequest = new ArticleRequest { ArticleType = "Articulo Tradicional", Title = "Realidad Aumentada", NumberOfAuthors = 2, Credit = true, Issn = "1213s", JournalName = "Nature", JournalType = "A1", Language = "Español" };
+            var articleRequest = new ArticleRequest {DocumentTeacher="1035", ArticleType = "Articulo Tradicional", Title = "Realidad Aumentada", NumberOfAuthors = 2, Credit = true, Issn = "1213s", JournalName = "Nature", JournalType = "A1", Language = "Español" };
             _articleService.Execute(articleRequest);
 
             Article article = _articleService.Consult(articleRequest.Title);
@@ -114,8 +114,8 @@ namespace Aplicattion.Test
         {
 
             CreateBookService _bookService = new CreateBookService(new UnitOfWork(_context));
-            var bookRequest = new CreateBookRequest { Title = "DDD", NumberOfAuthors = 2, Credit = true , BookType = "Libro de ensayo", Editorial="Norma",Isbn="asaa",Languaje="Español",PublicationDate=DateTime.Now};
-            _bookService.Execute(bookRequest);
+            var bookRequest = new CreateBookRequest {DocumentTeacher="1035", Title = "DDD", NumberOfAuthors = 2, Credit = true , BookType = "Libro de ensayo", Editorial="Norma",Isbn="asaa",Languaje="Español",PublicationDate=DateTime.Now};
+            _bookService.CreateBook(bookRequest);
 
             Book book = _bookService.Consult(bookRequest.Title);
             SendRequestService _sendRequestService = new SendRequestService(new UnitOfWork(_context));
@@ -131,7 +131,7 @@ namespace Aplicattion.Test
         {
 
             CreateEventService _eventService = new CreateEventService(new UnitOfWork(_context));
-            var eventRequest = new CreateEventRequest {Title = "Ready Player One", NumberOfAuthors = 2, Credit = true, EventPlace="",EventType="Internacional",Isbn="ssad",Issn="asdfas",Languaje="Español",Memories="carlos",Name="Mineria de datos en la actualidad",EventWeb="www.con.com",EventDate=DateTime.Now};
+            var eventRequest = new CreateEventRequest { DocumentTeacher = "1035", Title = "Ready Player One", NumberOfAuthors = 2, Credit = true, EventPlace="",EventType="Internacional",Isbn="ssad",Issn="asdfas",Languaje="Español",Memories="carlos",Name="Mineria de datos en la actualidad",EventWeb="www.con.com",EventDate=DateTime.Now};
             _eventService.Execute(eventRequest);
 
             Event events = _eventService.Consult(eventRequest.Isbn);
@@ -149,7 +149,7 @@ namespace Aplicattion.Test
         {
 
             CreateSoftwareService _softwareService = new CreateSoftwareService(new UnitOfWork(_context));
-            var softwareRequest = new CreateSoftwareRequest { Title = "Ciarp", NumberOfAuthors = 2, Credit = true, Headline="Rafael",Impact="yes"};
+            var softwareRequest = new CreateSoftwareRequest { DocumentTeacher = "1035", Title = "Ciarp", NumberOfAuthors = 2, Credit = true, Headline="Rafael",Impact="yes"};
             _softwareService.Execute(softwareRequest);
 
             Software article = _softwareService.Consult(softwareRequest.Title);

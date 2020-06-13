@@ -23,22 +23,13 @@ namespace WebApi.Controllers
             _unitOfWork = unitOfWork;
         }
 
-       /* [HttpPost]
+        [HttpPost]
         public ActionResult<CreateArticleService> Post(ArticleRequest request)
         {
             CreateArticleService _service = new CreateArticleService(_unitOfWork);
             CreateArticleResponse response = _service.Execute(request);
             return Ok(response);
-        }*/
-
-        [HttpPost]
-        public ActionResult<CreateArticleService> TeacherCreateArticle(ArticleRequest request)
-        {
-            CreateArticleService _service = new CreateArticleService(_unitOfWork);
-            CreateArticleResponse response = _service.TeacherArticleResponse(request);
-            return Ok(response);
         }
-
 
         [HttpGet]
         public IEnumerable<Article> Gets()

@@ -17,31 +17,39 @@ namespace Application
 
         public CreateEventResponse Execute(CreateEventRequest request)
         {
-            AcademicProductivity soft = _unitOfWork.EventRepository.FindFirstOrDefault(t => t.Title == request.Title);
-            if (soft == null)
+            Teacher teacher = _unitOfWork.TeacherRepository.FindFirstOrDefault(t => t.DocumentId == request.DocumentTeacher);
+            if (teacher == null)
             {
-                Event newEvent = new Event();
-                newEvent.NumberOfAuthors = request.NumberOfAuthors;
-                newEvent.Title = request.Title;
-                newEvent.Credit = request.Credit;
-                newEvent.Title = request.Title;
-                newEvent.Memories = request.Memories;
-                newEvent.Languaje = request.Languaje;
-                newEvent.Issn = request.Issn;
-                newEvent.Isbn = request.Isbn;
-                newEvent.EventDate = request.EventDate;
-                newEvent.EventPlace = request.EventPlace;
-                newEvent.EventWeb = request.EventWeb;
-                newEvent.EventType = request.EventType;
-                _unitOfWork.EventRepository.Add(newEvent);
-                _unitOfWork.Commit();
-                return new CreateEventResponse() { Menssage = "Event registado con exito" };
-
+                return new CreateEventResponse() { Menssage = $"El docente no existe" };
             }
             else
             {
-                return new CreateEventResponse() { Menssage = "No se pudo registrar el Event" };
-            }
+                AcademicProductivity soft = _unitOfWork.EventRepository.FindFirstOrDefault(t => t.Title == request.Title);
+                if (soft == null)
+                {
+                    Event newEvent = new Event();
+                    newEvent.NumberOfAuthors = request.NumberOfAuthors;
+                    newEvent.Title = request.Title;
+                    newEvent.Credit = request.Credit;
+                    newEvent.Title = request.Title;
+                    newEvent.Memories = request.Memories;
+                    newEvent.Languaje = request.Languaje;
+                    newEvent.Issn = request.Issn;
+                    newEvent.Isbn = request.Isbn;
+                    newEvent.EventDate = request.EventDate;
+                    newEvent.EventPlace = request.EventPlace;
+                    newEvent.EventWeb = request.EventWeb;
+                    newEvent.EventType = request.EventType;
+                    _unitOfWork.EventRepository.Add(newEvent);
+                    _unitOfWork.Commit();
+                    return new CreateEventResponse() { Menssage = "Event registado con exito" };
+
+                }
+                else
+                {
+                    return new CreateEventResponse() { Menssage = "No se pudo registrar el Event" };
+                }
+            }    
         }
 
         public Event Consult(string isbn)
@@ -59,6 +67,7 @@ namespace Application
 
     public class CreateEventRequest
     {
+        public string DocumentTeacher { get; set; }
         public string Title { get; set; }
         public bool Credit { get; set; }
         public int NumberOfAuthors { get; set; }

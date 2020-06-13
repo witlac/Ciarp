@@ -17,24 +17,33 @@ namespace Application
 
         public CreateSoftwareResponse Execute(CreateSoftwareRequest request)
         {
-            AcademicProductivity soft = _unitOfWork.SoftwareRepository.FindFirstOrDefault(t => t.Title == request.Title);
-            if (soft == null)
+            Teacher teacher = _unitOfWork.TeacherRepository.FindFirstOrDefault(t => t.DocumentId == request.DocumentTeacher);
+            if (teacher == null)
             {
-                Software newSoft = new Software();
-                newSoft.NumberOfAuthors = request.NumberOfAuthors;
-                newSoft.Title = request.Title;
-                newSoft.Credit = request.Credit;
-                newSoft.Headline = request.Headline;
-                newSoft.Impact = request.Impact;
-                _unitOfWork.SoftwareRepository.Add(newSoft);
-                _unitOfWork.Commit();
-                return new CreateSoftwareResponse() { Menssage = "Software registado con exito" };
-
+                return new CreateSoftwareResponse() { Menssage = $"El docente no existe" };
             }
             else
             {
-                return new CreateSoftwareResponse() { Menssage = "No se pudo registrar el software" };
+                AcademicProductivity soft = _unitOfWork.SoftwareRepository.FindFirstOrDefault(t => t.Title == request.Title);
+                if (soft == null)
+                {
+                    Software newSoft = new Software();
+                    newSoft.NumberOfAuthors = request.NumberOfAuthors;
+                    newSoft.Title = request.Title;
+                    newSoft.Credit = request.Credit;
+                    newSoft.Headline = request.Headline;
+                    newSoft.Impact = request.Impact;
+                    _unitOfWork.SoftwareRepository.Add(newSoft);
+                    _unitOfWork.Commit();
+                    return new CreateSoftwareResponse() { Menssage = "Software registado con exito" };
+
+                }
+                else
+                {
+                    return new CreateSoftwareResponse() { Menssage = "No se pudo registrar el software" };
+                }
             }
+            
         }
         public Software Consult(string title)
         {
@@ -52,6 +61,7 @@ namespace Application
 
     public class CreateSoftwareRequest
     {
+        public string DocumentTeacher { get; set; }
         public string Title { get; set; }
         public bool Credit { get; set; }
         public int NumberOfAuthors { get; set; }

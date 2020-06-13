@@ -27,7 +27,7 @@ namespace WebApi.Controllers
         public ActionResult<CreateBookService> Post(CreateBookRequest request)
         {
             CreateBookService _service = new CreateBookService(_unitOfWork);
-            CreateBookResponse response = _service.Execute(request);
+            CreateBookResponse response = _service.CreateBook(request);
             return Ok(response);
         }
 
