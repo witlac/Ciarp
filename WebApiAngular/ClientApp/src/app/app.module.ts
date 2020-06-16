@@ -5,12 +5,25 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { CreateArticleComponent } from './components/article/create-article/create-article.component';
+import { ConsultArticleComponent } from './components/AcademicProductivity/consult-article/consult-article.component';
+import { AppRoutingModule } from './app-routing.module';
+import { ConsultRequestComponent } from './components/request/consult-request/consult-request.component';
+import { CreateBookComponent } from './components/AcademicProductivity/create-book/create-book.component';
+import { CreateSoftwareComponent } from './components/AcademicProductivity/create-software/create-software.component';
+import { CreateEventComponent } from './components/AcademicProductivity/create-event/create-event.component';
+import { CreateProductivityComponent } from './components/AcademicProductivity/create-productivity/create-productivity.component';
+import { CreateArticleComponent } from './components/AcademicProductivity/create-article/create-article.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    ConsultArticleComponent,
+    ConsultRequestComponent,
+    CreateBookComponent,
+    CreateSoftwareComponent,
+    CreateEventComponent,
+    CreateProductivityComponent,
     CreateArticleComponent
   ],
   imports: [
@@ -18,8 +31,9 @@ import { CreateArticleComponent } from './components/article/create-article/crea
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
-      { path: '', component: CreateArticleComponent, pathMatch: 'full' },
-    ])
+      { path: '', component: AppComponent, pathMatch: 'full' },
+    ]),
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

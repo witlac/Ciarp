@@ -1026,7 +1026,7 @@ pre code {
   width: 100%;
   padding-right: 15px;
   padding-left: 15px;
-  margin-right: auto;
+  margin-right: 15px;
   margin-left: auto;
 }
 
@@ -17947,15 +17947,6 @@ html[dir="rtl"] .form-check .form-check-sign .check:before {
   transform: translate3d(0, -50px, 0);
 }
 
-.card .map {
-  height: 280px;
-  border-radius: 6px;
-  margin-top: 15px;
-}
-
-.card .map.map-big {
-  height: 420px;
-}
 
 .card .card-body.table-full-width {
   padding: 0;
@@ -19753,4 +19744,3 @@ Copyright (c) 2015 Daniel Eden
   }
 }
 
-/*# sourceMappingURL=dashboard-free.css.map */
