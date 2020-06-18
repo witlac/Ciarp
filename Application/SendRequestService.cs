@@ -14,7 +14,7 @@ namespace Application
             _unitOfWork = unitOfWork;
         }
 
-        public CreateRequestResponse SendArticle(SendRequestProperties properties)
+        public CreateRequestResponse SendProductivity(SendRequestProperties properties)
         {
             switch (properties.ProductivityType)
             {

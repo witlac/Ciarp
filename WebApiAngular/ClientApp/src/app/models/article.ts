@@ -5,7 +5,7 @@ export class Article {
   JournalName: string;
   Issn: string;
   Language: string;
-  Title: string;
+  title: string;
   Credit: boolean;
   NumberOfAuthors: number;
 

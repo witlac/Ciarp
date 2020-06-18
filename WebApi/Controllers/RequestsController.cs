@@ -28,7 +28,7 @@ namespace WebApi.Controllers
         public ActionResult<CreateArticleService> Post(SendRequestProperties request)
         {
             SendRequestService _service = new SendRequestService(_unitOfWork);
-            CreateRequestResponse response = _service.SendArticle(request);
+            CreateRequestResponse response = _service.SendProductivity(request);
             return Ok(response);
         }
 

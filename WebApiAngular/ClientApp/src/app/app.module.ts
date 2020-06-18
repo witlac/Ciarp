@@ -1,9 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { NgClass} from '@angular/common';
 import { RouterModule } from '@angular/router';
-
 import { AppComponent } from './app.component';
 import { ConsultArticleComponent } from './components/AcademicProductivity/consult-article/consult-article.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -13,7 +13,7 @@ import { CreateSoftwareComponent } from './components/AcademicProductivity/creat
 import { CreateEventComponent } from './components/AcademicProductivity/create-event/create-event.component';
 import { CreateProductivityComponent } from './components/AcademicProductivity/create-productivity/create-productivity.component';
 import { CreateArticleComponent } from './components/AcademicProductivity/create-article/create-article.component';
-
+import { ArticleService } from './services/article.service';
 
 @NgModule({
   declarations: [
@@ -30,12 +30,13 @@ import { CreateArticleComponent } from './components/AcademicProductivity/create
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot([
       { path: '', component: AppComponent, pathMatch: 'full' },
     ]),
     AppRoutingModule
   ],
-  providers: [],
+  providers: [ArticleService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

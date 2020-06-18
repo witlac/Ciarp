@@ -23,69 +23,76 @@
         <p class="card-category">Complete el formulario</p>
       </div>
       <div class="card-body">
-        <form>
+        <form [formGroup]="formGroup">
           <div class="row">
             <div class="col-md-5">
               <div class="form-group">
                 <label class="bmd-label-floating">Titulo</label>
-                <input type="text" class="form-control">
+                <input formControlName="title" type="text" class="form-control"/>             
               </div>
             </div>
+
             <div class="col-md-4">
-              <div class="form-group">
+              <div class="form-group" >
                 <label class="bmd-label-floating">Tipo de articulo</label>
-                <input type="email" class="form-control">
+                <input formControlName="TipoArticulo" type="email" class="form-control"/>
+                
               </div>
             </div>
+    
           </div>
           <div class="row">
+
             <div class="col-md-6">
-              <div class="form-group">
+              <div class="form-group" >
                 <label class="bmd-label-floating">Tipo de revista</label>
-                <input type="text" class="form-control">
+                <input formControlName="TipoRevista" type="text" class="form-control"/>
               </div>
             </div>
+
             <div class="col-md-6">
-              <div class="form-group">
+              <div class="form-group" >
                 <label class="bmd-label-floating">ISSN</label>
-                <input type="text" class="form-control">
+                <input formControlName="Issn" type="text" class="form-control"/>
               </div>
             </div>
+
           </div>
           <div class="row">
+
             <div class="col-md-12">
-              <div class="form-group">
+              <div class="form-group" >
                 <label class="bmd-label-floating">Idioma</label>
-                <input type="text" class="form-control">
+                <input formControlName="Idioma" type="text" class="form-control"/>
               </div>
+              
             </div>
+
           </div>
           <div class="row">
+
             <div class="col-md-4">
               <div class="form-group">
                 <label class="bmd-label-floating">Presenta credito</label>
-                <input type="text" class="form-control">
+                <input type="text" formControlName="PresentaCredito" class="form-control"/>
               </div>
+             
             </div>
+
             <div class="col-md-4">
               <div class="form-group">
                 <label class="bmd-label-floating">Numero de autores</label>
-                <input type="text" class="form-control">
+                <input formControlName="NumeroAutores" type="text" class="form-control"/>
               </div>
+              
             </div>
+
           </div>
           <div class="row">
-            <div class="col-md-12">
-              <div class="form-group">
-                <label>Soportes</label>
-                <div class="form-group">
-                  <label class="bmd-label-floating">Anexe todos los soportes requeridos para el registro de su productividad.</label>
-                  <textarea class="form-control" rows="5"></textarea>
-                </div>
-              </div>
-            </div>
+
+       
           </div>
-          <button type="submit" class="btn btn-primary pull-right" style="background-color: green">Registrar articulo</button>
+          <button (click)="onSubmit()" [disabled]="formGroup.invalid" class="btn btn-primary pull-right" style="background-color: green">Registrar articulo</button>
           <div class="clearfix"></div>
         </form>
       </div>
