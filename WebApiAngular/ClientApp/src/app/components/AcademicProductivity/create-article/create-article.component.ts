@@ -29,12 +29,12 @@ export class CreateArticleComponent implements OnInit {
     this.article = new Article();
     this.formGroup = this.formBuilder.group({
       title: [this.article.title, Validators.required],
-      TipoArticulo: [this.article.ArticleType, Validators.required],
-      TipoRevista: [this.article.JournalType, Validators.required],
-      Issn: [this.article.Issn, Validators.required],
-      Idioma: [this.article.Language, Validators.required],
-      PresentaCredito: [this.article.Credit, Validators.required],
-      NumeroAutores: [this.article.NumberOfAuthors, Validators.required],
+      tipoArticulo: [this.article.articleType, Validators.required],
+      tipoRevista: [this.article.journalType, Validators.required],
+      issn: [this.article.issn, Validators.required],
+      idioma: [this.article.language, Validators.required],
+      presentaCredito: [this.article.credit, Validators.required],
+      numeroAutores: [this.article.numberOfAuthors, Validators.required],
 
     })
   }
@@ -53,7 +53,8 @@ export class CreateArticleComponent implements OnInit {
 
   addArticle() {
     this.article = this.formGroup.value;
-    this.article.DocumentTeacher = "123";
+    this.article.documentTeacher = "123";
+    console.log(this.article);
     this.articleService.post(this.article).subscribe(p => {
       if (p != null) {
         alert('Articulo creado con exito!')

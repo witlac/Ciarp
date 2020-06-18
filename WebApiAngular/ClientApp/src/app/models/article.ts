@@ -1,12 +1,12 @@
 export class Article {
-  DocumentTeacher: string;
-  JournalType: string;
-  ArticleType: string;
-  JournalName: string;
-  Issn: string;
-  Language: string;
+  documentTeacher: string;
+  journalType: string;
+  articleType: string;
+  journalName: string;
+  issn: string;
+  language: string;
   title: string;
-  Credit: boolean;
-  NumberOfAuthors: number;
+  credit: boolean;
+  numberOfAuthors: number;
 
 }

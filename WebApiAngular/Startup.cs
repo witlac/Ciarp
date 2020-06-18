@@ -61,6 +61,9 @@ namespace WebApiAngular
                 configuration.RootPath = "ClientApp/dist";
             });
 
+            services.AddDbContext<CiarpContext>
+               (opt => opt.UseSqlServer("Server=.\\;Database=Ciarp;Trusted_Connection=True;MultipleActiveResultSets=true"));
+
             services.AddScoped<IUnitOfWork, UnitOfWork>(); //Crear Instancia por peticion
             services.AddScoped<IDbContext, CiarpContext>(); //Crear Instancia por peticion
             services.AddControllers();
@@ -87,17 +90,13 @@ namespace WebApiAngular
                 app.UseSpaStaticFiles();
             }
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller}/{action=Index}/{id?}");
-            });
+           
 
             app.UseHttpsRedirection();
 
             app.UseRouting();
 
+            
             app.UseAuthorization();
 
 
@@ -108,6 +107,14 @@ namespace WebApiAngular
                     options.SwaggerEndpoint("/swagger/v1/swagger.json", "v2");
                 }
             );
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller}/{action=Index}/{id?}");
+            });
+
 
             app.UseSpa(spa =>
             {

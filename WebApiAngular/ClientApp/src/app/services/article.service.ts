@@ -27,8 +27,8 @@ export class ArticleService {
   }
 
 
-  post(Article: Article): Observable<Article> {
-    return this.http.post<Article>(this.baseUrl + 'api/Articles', Article)
+  post(article: Article): Observable<Article> {
+    return this.http.post<Article>(this.baseUrl + 'api/Articles', article)
       .pipe(
         catchError(this.handleErrorService.handleError<Article>('Registrar Articulo', null))
       );
