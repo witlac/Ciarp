@@ -23,7 +23,7 @@ node {
     
 
   stage('Publish') {
-    bat 'dotnet publish WebApi/WebApi.csproj -c Release -o C:/DeployCiarp'
+    bat 'dotnet publish WebApiAngular/WebApiAngular.csproj -c Release -o C:/DeployCiarp'
   } 
   
 }
